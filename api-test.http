@@ -1,0 +1,86 @@
+### Listar todos os usuários
+GET http://localhost:8080/api/users
+Accept: application/json
+
+###
+
+### Buscar usuário por ID
+GET http://localhost:8080/api/users/2
+Accept: application/json
+
+###
+
+### Criar novo usuário
+POST http://localhost:8080/api/users
+Content-Type: application/json
+
+{
+  "nome": "BRUNO",
+  "email": "bruno@email.com",
+  "idade": 42,
+  "senha": "4321"
+}
+
+###
+
+### Atualizar usuário existente
+PUT http://localhost:8080/api/users/1
+Content-Type: application/json
+
+{
+  "nome": "Ana Atualizada",
+  "email": "ana@email.com",
+  "idade": 26,
+  "senha": "abcd"
+}
+
+###
+
+### Deletar usuário
+DELETE http://localhost:8080/api/users/1
+
+###
+
+### Listar todas as viagens
+GET http://localhost:8080/api/travels
+Accept: application/json
+
+###
+
+### Buscar viagem por ID
+GET http://localhost:8080/api/travels/1
+Accept: application/json
+
+###
+
+### Criar nova viagem
+POST http://localhost:8080/api/travels
+Content-Type: application/json
+
+{
+  "titulo": "Teste",
+  "descricao": "Passeio turístico",
+  "destino": "São Paulo",
+  "feedback": "Muito bom!",
+  "duracao": 32,
+  "imagem": "imagem.jpg"
+}
+
+###
+
+### Atualizar viagem existente
+PUT http://localhost:8080/api/travels/1
+Content-Type: application/json
+
+{
+  "titulo": "Viagem Atualizada",
+  "descricao": "Passeio atualizado",
+  "destino": "Rio de Janeiro",
+  "feedback": "Excelente!",
+  "duracao": 8
+}
+
+###
+
+### Deletar viagem
+DELETE http://localhost:8080/api/travels/1
