@@ -3,9 +3,11 @@ package com.example.viagem.controller;
 import com.example.viagem.model.User;
 import com.example.viagem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.security.crypto.password.PasswordEncoder;
+    
 import java.util.List;
 import java.util.Optional;
 
@@ -15,6 +17,9 @@ public class UserController {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping
     public List<User> getAllUsers() {
@@ -30,8 +35,26 @@ public class UserController {
 
     @PostMapping
     public User createUser(@RequestBody User user) {
-        return userRepository.save(user);
+    user.setSenha(passwordEncoder.encode(user.getSenha()));
+    return userRepository.save(user);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody User loginData) {
+    User user = userRepository.findByEmail(loginData.getEmail());
+
+    if (user == null) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Usuário não encontrado.");
+    }
+
+    if (!passwordEncoder.matches(loginData.getSenha(), user.getSenha())) {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Senha incorreta.");
+    }
+
+    user.setSenha(null);
+
+    return ResponseEntity.ok(user);
+}
 
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") Long id, @RequestBody User userDetails) {

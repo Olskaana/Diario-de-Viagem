@@ -184,3 +184,6 @@ SELECT * FROM usersINFORMATION_SCHEMA.USERS [90079-232]
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:658)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63)
 	at java.base/java.lang.Thread.run(Thread.java:840)
+2025-06-11 10:48:12.335486-03:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Value too long for column "IMAGEM CHARACTER VARYING(255)": "'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBwgHBgkIBwgKCgkLDRYP... (11863)"; SQL statement:
+insert into travel (descricao,destino,duracao,feedback,imagem,titulo,id) values (?,?,?,?,?,?,default) [22001-232]
